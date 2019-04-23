@@ -16,3 +16,7 @@
 - 仿真波形输出为**z**或者**x**
   
   请检查仿真文件的激励(reg)和输出(wire)信号是否正确连接和赋值。一般这种情况是信号连接错误导致。  
+
+- 使用IP核进行设计，如果设计中存在三态，在**Generate Output Products**时，Systhesis Options选择**Out of context per IP**，查看综合实现后的原理图，三态设计引脚不会映射出三态门？
+
+  （1）Systhesis Options包括Global、Out of context per IP和Out of context per Block Design；（2）Out of context per IP指让vivado在综合的时候对IP进行单独综合，将IP综合的结果生成一个文件（.dcp），然后在工程需要用到IP的时候，只需要从.dcp文件中解析出对应IP的网表文件即可，而不需对IP进行重新综合，这样的方式可以加快综合的速度；（3）Global选项则是每次工程综合的时候，IP核都会和工程一起综合，这样综合的时间就很长，而且Global选项不会产生.dcp文件，因为工程综合的时候是对IP核的源码进行综合的。（3）如果设计中存在三态（高阻态），Out of Contex per IP综合操作就会受到影响，FPGA仅支持I/O输出端口的高阻态，在器件内部是不允许的，如果使用Out of Contex per IP综合方式，Vivado工具并不知道某个具体的信号是连接I/O输出还是在器件内部进行连接，最后，综合工具会将这个高阻信号转换为某个逻辑值，而不是最为高阻态进行综合。（4）解决办法：综合方式选择Global
