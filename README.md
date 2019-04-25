@@ -1,5 +1,11 @@
 # X2401020-faq
 
+
+## Basys3 F.A.Q 
+- 为什么生成了比特流文件，但是无法下载到开发板上？
+
+  请检查：（1）是否打开了Basys3开发板的电源开关；（2）尝试更换一根USB连接线；（3）检查项目创建时选择的part型号是否正确**xc7a35tcpg236-1**。
+
 ## Vivado F.A.Q 
 - 为什么我在vivado中**Behavioral Simulation**和**Post-Implementation Timing Simulation**的波形没有差别？
  
